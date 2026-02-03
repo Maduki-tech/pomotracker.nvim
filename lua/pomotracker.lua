@@ -2,9 +2,11 @@
 local module = require("pomotracker.module")
 
 ---@class Config
----@field opt string Your config option
+---@field focus_time number Focus time in minutes
+---@field break_time number Short break time in minutes
 local config = {
-    opt = "Hello!",
+    focus_time = 25,
+    break_time = 5,
 }
 
 ---@class MyModule
