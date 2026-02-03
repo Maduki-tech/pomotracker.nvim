@@ -1,4 +1,4 @@
-local plugin = require("plugin_name")
+local plugin = require("pomotracker")
 
 describe("setup", function()
   it("works with default", function()
