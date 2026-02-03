@@ -1,5 +1,5 @@
 -- main module file
-local module = require("pomotracker.module")
+local timer = require("pomotracker.timer")
 
 ---@class Config
 ---@field focus_time number Focus time in minutes
@@ -9,21 +9,25 @@ local config = {
     break_time = 5,
 }
 
----@class MyModule
+---@class Pomotracker
 local M = {}
 
 ---@type Config
 M.config = config
 
 ---@param args Config?
--- you can define your setup function here. Usually configurations can be merged, accepting outside params and
--- you can also put some validation here for those.
 M.setup = function(args)
     M.config = vim.tbl_deep_extend("force", M.config, args or {})
 end
 
-M.hello = function()
-    return module.my_first_function(M.config.opt)
+M.startTimer = function()
+    timer.start()
+end
+M.stopTimer = function()
+    timer.stop()
+end
+M.finishTimer = function()
+    timer.finish()
 end
 
 return M
