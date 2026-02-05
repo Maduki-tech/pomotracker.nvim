@@ -1,5 +1,5 @@
-vim.api.nvim_create_user_command(
-    "MyFirstFunction",
-    require("pomotracker").hello,
-    {}
-)
+-- vim.api.nvim_create_user_command(
+--     "MyFirstFunction",
+--     require("pomotracker").hello,
+--     {}
+-- )
