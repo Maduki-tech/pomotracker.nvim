@@ -1,3 +1,5 @@
+local async = require("plenary.async")
+
 ---@class Timer
 ---@field time number Current time in seconds
 ---@field running boolean Is the timer running
@@ -25,7 +27,32 @@ M.start = function(focusMinutes)
     M.running = true
 
     -- Start the countdown timer
-    countDownTimer()
+    -- FIX: This is not the best way to implement a timer, but it works for now. We can improve this later by using a more accurate timer implementation.
+    async.run(function()
+        while M.running and M.time > 0 do
+            countDownTimer()
+            async.util.sleep(1000) -- Sleep for 1 second
+        end
+        if M.running and M.time <= 0 then
+            M.running = false
+            vim.notify(
+                "Pomodoro finished! Break will start in 10 seconds.",
+                vim.log.levels.INFO,
+                {}
+            )
+            vim.defer_fn(function()
+                M.start(5)
+            end, 10000)
+        end
+    end, function(err)
+        if err then
+            vim.notify(
+                "Error starting PomodoroTimer ",
+                vim.log.levels.ERROR,
+                {}
+            )
+        end
+    end)
 end
 
 --- Stopping the timer and keep the current time

@@ -22,6 +22,9 @@ end
 
 M.quickPomo = function()
     timer.start(M.config.focus_time)
+    vim.notify(
+        "Pomodoro started for " .. (M.config.focus_time / 60) .. " minutes!"
+    )
 end
 
 M.taskPomo = function()
@@ -45,6 +48,7 @@ M.showTimer = function()
     local time = timer.GetTimer()
     local minutes = math.floor(time / 60)
     local seconds = time % 60
+    vim.notify(string.format("Time Left: %02d:%02d", minutes, seconds))
     return string.format("Timer: %02d:%02d", minutes, seconds)
 end
 
