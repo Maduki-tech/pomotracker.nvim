@@ -2,10 +2,12 @@ local async = require("plenary.async")
 
 ---@class Timer
 ---@field time number Current time in seconds
----@field running boolean Is the timer running
+---@field break_time number Break time in seconds
+---@field focus_time number Focus time in seconds
 local M = {
     time = 0,
-    running = false,
+    break_time = 0,
+    focus_time = 0,
 }
 
 local countDownTimer = function()
@@ -18,13 +20,16 @@ end
 
 --- Starting the timer
 --- @param focusMinutes number Focus time in minutes
-M.start = function(focusMinutes)
+--- @param breakMinutes number Break time in minutes
+M.start = function(focusMinutes, breakMinutes)
     if M.running then
         return
     end
 
     M.time = focusMinutes
     M.running = true
+    M.focus_time = focusMinutes
+    M.break_time = breakMinutes
 
     -- Start the countdown timer
     -- FIX: This is not the best way to implement a timer, but it works for now. We can improve this later by using a more accurate timer implementation.

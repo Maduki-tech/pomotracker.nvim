@@ -21,7 +21,7 @@ M.setup = function(args)
 end
 
 M.quickPomo = function()
-    timer.start(M.config.focus_time)
+    timer.start(M.config.focus_time, M.config.break_time)
     vim.notify(
         "Pomodoro started for " .. (M.config.focus_time / 60) .. " minutes!"
     )
