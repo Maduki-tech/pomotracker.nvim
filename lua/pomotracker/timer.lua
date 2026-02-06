@@ -41,6 +41,7 @@ M.start = function(focusMinutes)
                 {}
             )
             vim.defer_fn(function()
+                -- TODO: Use the config here
                 M.start(5)
             end, 10000)
         end
